@@ -6,16 +6,16 @@ function hour_list(){
   let table_body = document.getElementById('table-body');
   let table_row = document.createElement('tr');
 
-  let empty_cell = document.createElement('td');
+  let empty_cell = document.createElement('th');
   table_row.appendChild(empty_cell);
 
   for(let hour = 0; hour < hours.length; hour++){
-    let table_data = document.createElement('td');
+    let table_data = document.createElement('th');
     table_data.textContent = hours[hour];
     table_row.appendChild(table_data);
   }
 
-  let total_cell = document.createElement('td');
+  let total_cell = document.createElement('th');
   total_cell.textContent = 'Daily Location Total';
   table_row.appendChild(total_cell);
 
@@ -101,4 +101,3 @@ Dubai.draw_row();
 Paris.draw_row();
 Lima.draw_row();
 footer_row();
-
