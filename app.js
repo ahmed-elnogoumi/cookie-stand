@@ -23,8 +23,12 @@ function hour_list(){
 }
 
 
-function City(city_name, min_customer, max_customer, avg_cookies){
+function City(city_name, address, hours_open, contact_information, min_customer, max_customer, avg_cookies){
   this.city_name = city_name;
+  this.address = address;
+  this.hours_open = hours_open;
+  this.contact_information = contact_information;
+
   this.min_customer = min_customer;
   this.max_customer = max_customer;
   this.avg_cookies = avg_cookies;
