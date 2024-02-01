@@ -44,6 +44,27 @@ City.prototype.cookies_purchased = function(){
   return cookies_purchased;
 };
 
+City.prototype.toHTML = function() {
+  let htmlContent = `
+      <h2>${this.city_name}</h2>
+      <ul>
+        <li>Address: ${this.address}</li>
+        <li>Hours: ${this.hours_open}</li>
+        <li>Contact: ${this.contact_information}</li>
+      </ul>
+  `;
+  return htmlContent;
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+  let cities = [Seattle, Tokyo, Dubai, Paris, Lima];
+  let mainContent = document.querySelector('main');
+
+  cities.forEach(city => {
+      mainContent.innerHTML += city.toHTML();
+  });
+});
+
 City.prototype.draw_row = function() {
   let total_cookies = 0;
   let table_body = document.getElementById('table-body');
@@ -92,11 +113,12 @@ function footer_row() {
 }
 
 
-let Seattle = new City('Seattle', 23, 65, 6.3);
-let Tokyo = new City('Tokyo', 3, 24, 1.2);
-let Dubai = new City('Dubai', 11, 38, 3.7);
-let Paris = new City('Paris', 20, 38, 2.3);
-let Lima = new City('Lima', 2, 16, 4.6);
+let Seattle = new City('Seattle', '123 Rainy Street, Seattle, WA 98101, USA', '8:00 AM - 8:00 PM, Monday to Sunday', '+1 (206) 123-4567', 23, 65, 6.3);
+let Tokyo = new City('Tokyo', '456 Sakura Lane, Shibuya, Tokyo 150-0002, Japan', '9:00 AM - 9:00 PM, Monday to Sunday', '+81 3-1234-5678', 3, 24, 1.2);
+let Dubai = new City('Dubai', '789 Desert Avenue, Downtown Dubai, UAE', '10:00 AM - 10:00 PM, Monday to Sunday', '+971 4 123 4567', 11, 38, 3.7);
+let Paris = new City('Paris', '101 Eiffel Road, 75007 Paris, France', '8:00 AM - 8:00 PM, Monday to Sunday', '+33 1 23 45 67 89', 20, 38, 2.3);
+let Lima = new City('Lima', '202 Inca Trail, Miraflores, Lima 15074, Peru', '7:00 AM - 7:00 PM, Monday to Sunday', '+51 1 234 5678', 2, 16, 4.6);
+
 
 hour_list();
 Seattle.draw_row();
@@ -105,3 +127,5 @@ Dubai.draw_row();
 Paris.draw_row();
 Lima.draw_row();
 footer_row();
+
+City.toHTML();
