@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
         <style>
             body {
                 font-family: sans-serif;
@@ -14,9 +15,12 @@
                 padding: 5px;
             }
         </style>
+        <title></title>
     </head>
+    
     <body>
         <header>
+            <h1>Welcome to Pat's Salmon Cookies!</h1>
             <nav>
                 <ul>
                     <li><a href="index.html">home</a></li>
@@ -25,33 +29,40 @@
             </nav>
         </header>
 
-        <form>
+        <form id="new-city-form">
             <fieldset>
-                <legend>Add a new store to the table!</legend>
-            <div>
-                <label>Location Name</label>
-                <input>
-            </div>
-            <div>
-                <label>Minimum Customers Per Hour</label>
-                <input>
-            </div>
-            <div>
-                <label>Maximum Customers Per Hour</label>
-                <input>
-            </div>
-            <div>
-                <label>Average Cookies Per Sale</label>
-                <input>
-            </div>
+                <legend>Add a new store to the table!!!</legend>
+                <div>
+                    <label for="location-name">Location Name</label>
+                    <input id="location-name" for="location-name" type="text">
+                </div>
+                <div>
+                    <label for="min-customers">Minimum Customers Per Hour</label>
+                    <input id="min-customers" for="min-customers" type="number">
+                </div>
+                <div>
+                    <label for="max-customers">Maximum Customers Per Hour</label>
+                    <input id="max-customers" for="max-customers" type="number">
+                </div>
+                <div>
+                    <label for="avg-cookies">Average Cookies Per Sale</label>
+                    <input id="avg-cookies" for="avg-cookies" type="number">
+                </div>
+                <button type="submit">Click here to add!</button>
             </fieldset>
         </form>
 
         <table>
             <tbody id="table-body">
             </tbody>
+            <tfoot id="table-footer">
+            </tfoot>
         </table>
 
         <script src="app.js"></script>
+        <footer>
+            <p>&copy; 2023 Pat's Salmon Cookies</p>
+        </footer>
+
     </body>
 </html>

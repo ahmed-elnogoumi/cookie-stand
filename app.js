@@ -6,8 +6,9 @@ function hour_list(){
   let table_body = document.getElementById('table-body');
   let table_row = document.createElement('tr');
 
-  let empty_cell = document.createElement('th');
-  table_row.appendChild(empty_cell);
+  let location_names = document.createElement('th');
+  location_names.textContent = 'Locations';
+  table_row.appendChild(location_names);
 
   for(let hour = 0; hour < hours.length; hour++){
     let table_data = document.createElement('th');
@@ -61,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let mainContent = document.querySelector('main');
 
   cities.forEach(city => {
-      mainContent.innerHTML += city.toHTML();
+    mainContent.innerHTML += city.toHTML();
   });
 });
 
@@ -89,10 +90,16 @@ City.prototype.draw_row = function() {
 };
 
 function footer_row() {
-  let table = document.getElementById('table-body');
-  let number_of_columns = table.rows[0].cells.length;
+  let table = document.getElementById('sales-table'); // Assuming the table has an ID of 'sales-table'
+  let tableFooter = document.getElementById('table-footer');
+  tableFooter.innerHTML = ''; // Clear existing footer content
+  let footerRow = document.createElement('tr');
+
+  // Initialize totals array with zeros for each column
+  let number_of_columns = table.rows[0].cells.length; // Number of columns in the first row
   let totals = new Array(number_of_columns).fill(0);
 
+  // Calculate totals for each column
   for (let rowIndex = 1; rowIndex < table.rows.length; rowIndex++) {
     let row = table.rows[rowIndex];
     for (let colIndex = 0; colIndex < number_of_columns; colIndex++) {
@@ -101,15 +108,14 @@ function footer_row() {
     }
   }
 
-  let footerRow = document.createElement('tr');
-  footerRow.appendChild(document.createElement('td'));
-
-  for (let i = 1; i < totals.length; i++) {
+  // Create cells for the footer row
+  for (let i = 0; i < totals.length; i++) {
     let cell = document.createElement('td');
     cell.textContent = totals[i];
     footerRow.appendChild(cell);
   }
-  table.appendChild(footerRow);
+
+  tableFooter.appendChild(footerRow);
 }
 
 
@@ -128,4 +134,46 @@ Paris.draw_row();
 Lima.draw_row();
 footer_row();
 
-City.toHTML();
+// Function to handle new city form submission
+function handleNewCitySubmission() {
+  // Get the form element
+  const form = document.getElementById('new-city-form');
+ 
+  // Create a new city container if it doesn't exist
+  let container = document.getElementById('new-city-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'new-city-container';
+    form.parentNode.insertBefore(container, form.nextSibling);
+  }
+ 
+  // Attach the submit event listener to the form
+  form.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form from submitting traditionally
+ 
+    // Extract values from form fields
+    const city_name = document.getElementById('location-name').value;
+    const address = ""; // Assuming address is not provided by the form
+    const hours_open = ""; // Assuming hours are not provided by the form
+    const contact_information = ""; // Assuming contact info is not provided by the form
+    const min_customer = parseInt(document.getElementById('min-customers').value, 10);
+    const max_customer = parseInt(document.getElementById('max-customers').value, 10);
+    const avg_cookies = parseFloat(document.getElementById('avg-cookies').value);
+ 
+    // Instantiate a new city with form data
+    const newCity = new City(city_name, address, hours_open, contact_information, min_customer, max_customer, avg_cookies);
+ 
+    // Append the new city's data to the container
+    container.innerHTML += newCity.toHTML();
+ 
+    // Move the footer below the new container
+    const footer = document.getElementById('table-footer');
+    footer.parentNode.insertBefore(footer, container.nextSibling);
+ 
+    // Clear the form fields for new entries
+    event.target.reset();
+  });
+}
+
+// Call the function to set up the new city form submission handler
+handleNewCitySubmission();
